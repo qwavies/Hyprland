@@ -86,4 +86,8 @@ void CFloatTrackpadGesture::end(const ITrackpadGesture::STrackpadGestureEnd& e) 
 
     *m_window->m_realPosition = m_posTo;
     *m_window->m_realSize     = m_sizeTo;
+
+    // notify layout manager and application of floating state change
+    g_pLayoutManager->getCurrentLayout()->changeWindowFloatingMode(m_window.lock());
+    g_pHyprRenderer->damageWindow(m_window.lock());
 }
